@@ -5,16 +5,20 @@
 boidem = {};
 
 boidem.adlessCalc = (function() {
-  var loadFinished = (function() {
-      console.log("loadFinished");
-      alert("loadfinished");
-  });
+	var onResize = (function() {
+		$('body').prepend('<p> window dimensions = ' + $(window).width() + "x" + $(window).height() + '</p>');
+	});
 
-  return {
-    onDocumentReady:function() {
+	var loadFinished = (function() {
+			$(window).resize(onResize);
+			console.log("loadFinished");
+	});
+
+	return {
+		onDocumentReady:function() {
 		loadFinished();
-    }
-  }
+		}
+	}
 }());
 
 $(document).ready(boidem.adlessCalc.onDocumentReady);
