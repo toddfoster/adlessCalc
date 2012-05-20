@@ -1,41 +1,140 @@
 /* Author: Todd Foster
+
+TODO:
+o push css into external css file
+o animate button positioning
+o font size for display
+o web-app, offline manifest
+o icon
+o unicode multiply,divide symbols
 */
 
 /* global boidem */
 boidem = {};
 
 boidem.adlessCalc = (function() {
-	var makeButton = (function() {
-		$('body').prepend('<div id="button1" class="button">1</div>');
-		var button = $('#button1');
-		button.css({"background-color":"green"});
-		button.css({'position': 'absolute'});
-		button.css({'height': '70px'});
-		button.css({'width': '70px'});
-		button.css({'top': '68px'});
-		var rightPos = '70px';
-		button.css({'right': rightPos});
+	var NODEBUG = 0;
 
-		button.click(function() { $('#display').append("1"); });
+	var display;
+	var buttons = [];
+	var buttonDefinitions = [
+		{ 'symbol':'=', 'class':'greenButton', 'action':function() { console.log("= unimplemented"); } },
+		{ 'symbol':'X', 'class':'greenButton', 'action':function() { console.log("X unimplemented"); } },
+		{ 'symbol':'/', 'class':'greenButton', 'action':function() { console.log("/ unimplemented"); } },
+		{ 'symbol':'-', 'class':'greenButton', 'action':function() { console.log("- unimplemented"); } },
+		{ 'symbol':'+', 'class':'greenButton', 'action':function() { console.log("+ unimplemented"); } },
+		{ 'symbol':'+', 'class':'greenButton', 'action':function() { console.log("+ unimplemented"); } },
+		{ 'symbol':'M-', 'class':'greenButton', 'action':function() { console.log("M- unimplemented"); } },
+		{ 'symbol':'+/-', 'class':'greenButton', 'action':function() { console.log("+/- unimplemented"); } },
+		{ 'symbol':'9', 'class':'greenButton', 'action':function() { calculator.buttonPress('9'); } },
+		{ 'symbol':'6', 'class':'greenButton', 'action':function() { calculator.buttonPress('6'); } },
+		{ 'symbol':'3', 'class':'greenButton', 'action':function() { calculator.buttonPress('3'); } },
+		{ 'symbol':'.', 'class':'greenButton', 'action':function() { calculator.buttonPress('.'); } },
+		{ 'symbol':'M+', 'class':'greenButton', 'action':function() { console.log("M+ unimplemented"); } },
+		{ 'symbol':'sqrt', 'class':'greenButton', 'action':function() { console.log("sqrt unimplemented"); } },
+		{ 'symbol':'8', 'class':'greenButton', 'action':function() { calculator.buttonPress('8'); } },
+		{ 'symbol':'5', 'class':'greenButton', 'action':function() { calculator.buttonPress('5'); } },
+		{ 'symbol':'2', 'class':'greenButton', 'action':function() { calculator.buttonPress('2'); } },
+		{ 'symbol':'0', 'class':'greenButton', 'action':function() { calculator.buttonPress('0'); } },
+		{ 'symbol':'MR/MC', 'class':'greenButton', 'action':function() { console.log("MC unimplemented"); } },
+		{ 'symbol':'AC', 'class':'greenButton', 'action':function() { console.log("AC unimplemented"); } },
+		{ 'symbol':'7', 'class':'greenButton', 'action':function() { calculator.buttonPress('7'); } },
+		{ 'symbol':'4', 'class':'greenButton', 'action':function() { calculator.buttonPress('4'); } },
+		{ 'symbol':'1', 'class':'greenButton', 'action':function() { calculator.buttonPress('1'); } },
+		{ 'symbol':'0', 'class':'greenButton', 'action':function() { calculator.buttonPress('0'); } },
+	];
+
+
+	var onDocumentReady = (function() {
+			$('body').prepend('<div id="display" class="display"></div>');
+			display = $('#display');
+			display.css({'border-style': 'solid', 'border-width': '2px'});
+			display.css({'text-align':'right'});
+			display.css({'position': 'absolute'});
+			$(window).resize(onDocumentReady);
+
+			calculator.init(display);
+
+			makeButtons();
+
+			onResize();
+
+			NODEBUG || console.log("onDocumentReady finished");
+	});
+
+	var makeButtons = (function() {
+		var i;
+		for (i=0; i<buttonDefinitions.length; i+=1) {
+			var definition = buttonDefinitions[i];
+			NODEBUG || console.log("make button " + i + " for symbol " + definition.symbol);
+            $('body').append('<div id="button' + i + '" class="' + definition.class + '">' + definition.symbol + '</div>');
+            var button = $('#button' + i);
+            button.css({"background-color":"green"});
+            button.css({'position': 'absolute'});
+			button.css({'text-align':'center'});
+			button.click(definition.action);
+			buttons[i] = button;
+		}
 	});
 
 	var onResize = (function() {
-		$('body').prepend('<p> window dimensions = ' + $(window).width() + "x" + $(window).height() + '</p>');
+		var screenWidth = $(window).width();
+		var screenHeight = $(window).height();
+
+		var phi = (1.0 + Math.sqrt(5)) / 2.0;
+		NODEBUG || console.log("phi = " + phi);
+
+		var buttonHeight = Math.floor(screenHeight / 8);
+		var buttonWidth = Math.floor(Math.min(phi * buttonHeight, screenWidth / 4));
+		NODEBUG || console.log("Screen = " + screenWidth + "x" + screenHeight + "  button = " + buttonWidth + "x" + buttonHeight);
+
+		// Position display
+		display.css({'height': (phi * buttonHeight) + 'px'});
+		display.css({'width': (screenWidth - (buttonHeight / 2.0)) + 'px'});
+		display.css({'top': (buttonHeight * (2.0 - phi) / 2.0) + 'px'});
+		display.css({'right': (buttonHeight / 4.0) + 'px'});
+
+		// TODO: display font size -- rough heuristic depending on dimensions?
+
+		// Position buttons
+		// TODO: Animate!
+		var buttonsTop = 2.0 * buttonHeight;
+		var dx, dy;
+		var buttonsIndex = 0;
+		for (dx=0; dx + buttonWidth < screenWidth; dx += buttonWidth) {
+			for (dy=buttonsTop; dy + buttonHeight <  screenHeight; dy += buttonHeight) {
+				var button = buttons[buttonsIndex];
+				button.css({'width': buttonWidth + 'px'});
+				button.css({'height': buttonHeight + 'px'});
+				button.css({'right': dx + 'px'});
+				button.css({'top': dy + 'px'});
+
+				buttonsIndex += 1;
+			}
+		}
 	});
 
-	var loadFinished = (function() {
-			$('body').prepend('<div id="display" class="display">0</div>');
-			$('#display').css({'border-style': 'solid', 'border-width': '2px'});
-			$('#display').css({'text-align':'right'});
-			$(window).resize(onResize);
+	var calculator = (function() {
+		var display;
 
-			makeButton();
+		var init = (function(displayTarget) {
+			display = displayTarget;
+			display.text('0');
+		});
 
-			console.log("loadFinished");
-	});
+		var buttonPress = (function(value) {
+			NODEBUG || console.log("buttonPress: " + value);
+		});
+
+		return {
+			init:function(displayTarget) { init(displayTarget); },
+			buttonPress:function(value) { buttonPress(value); }
+		};
+}());
+
 
 	/* Single externally visible function. */
-	return { onDocumentReady:function() { loadFinished(); } }
+	return { onDocumentReady:function() { onDocumentReady(); } }
 }());
 
 $(document).ready(boidem.adlessCalc.onDocumentReady);
