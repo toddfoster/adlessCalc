@@ -38,3 +38,6 @@ Begun 19 May 2012
 * Respond to changing viewport size
 * memory buttons
 
+## Credits
+* [HTML5 boilerplate]:(http://html5boilerplate.com/)
+* Help with [buttons]:(http://tutorialzine.com/2010/10/css3-animated-bubble-buttons/)

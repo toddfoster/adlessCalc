@@ -10,29 +10,29 @@ boidem.adlessCalc = (function() {
 	var display;
 	var buttons = [];
 	var buttonDefinitions = [
-		{ 'symbol':'=', 'class':'otherButton', 'action':function() { calculator.equals(); } },
-		{ 'symbol':'X', 'class':'operationButton', 'action':function() { calculator.operatorPressed(function(a, b) { return a * b; }) } },
-		{ 'symbol':'/', 'class':'operationButton', 'action':function() { calculator.operatorPressed(function(a, b) { return a / b; }) } },
-		{ 'symbol':'-', 'class':'operationButton', 'action':function() { calculator.operatorPressed(function(a, b) { return a - b; }) } },
-		{ 'symbol':'+', 'stretch':'vertical', 'class':'tallOperationButton', 'action':function() { calculator.operatorPressed(function(a, b) { return a + b; }) } },
+		{ 'symbol':'=', 'class':'grey', 'action':function() { calculator.equals(); } },
+		{ 'symbol':'X', 'class':'orange', 'action':function() { calculator.operatorPressed(function(a, b) { return a * b; }) } },
+		{ 'symbol':'/', 'class':'orange', 'action':function() { calculator.operatorPressed(function(a, b) { return a / b; }) } },
+		{ 'symbol':'-', 'class':'orange', 'action':function() { calculator.operatorPressed(function(a, b) { return a - b; }) } },
+		{ 'symbol':'+', 'stretch':'vertical', 'class':'orange', 'action':function() { calculator.operatorPressed(function(a, b) { return a + b; }) } },
 		{ 'stretch':'skip' },
-		{ 'symbol':'M-', 'class':'memoryButton', 'action':function() { calculator.memory('-'); } },
-		{ 'symbol':'+/-', 'class':'operationButton', 'action':function() { calculator.negate(); } },
-		{ 'symbol':'9', 'class':'numberButton', 'action':function() { calculator.numberPressed('9'); } },
-		{ 'symbol':'6', 'class':'numberButton', 'action':function() { calculator.numberPressed('6'); } },
-		{ 'symbol':'3', 'class':'numberButton', 'action':function() { calculator.numberPressed('3'); } },
-		{ 'symbol':'.', 'class':'numberButton', 'action':function() { calculator.numberPressed('.'); } },
-		{ 'symbol':'M+', 'class':'memoryButton', 'action':function() { calculator.memory('+'); } },
-		{ 'symbol':'sqrt', 'class':'operationButton', 'action':function() { calculator.sqrt(); } },
-		{ 'symbol':'8', 'class':'numberButton', 'action':function() { calculator.numberPressed('8'); } },
-		{ 'symbol':'5', 'class':'numberButton', 'action':function() { calculator.numberPressed('5'); } },
-		{ 'symbol':'2', 'class':'numberButton', 'action':function() { calculator.numberPressed('2'); } },
-		{ 'symbol':'0', 'stretch':'horizontal', 'class':'longNumberButton', 'action':function() { calculator.numberPressed('0'); } },
-		{ 'symbol':'MR/MC', 'class':'memoryButton', 'action':function() { calculator.memory('rc'); } },
-		{ 'symbol':'AC', 'class':'clearButton', 'action':function() { calculator.reset(); } },
-		{ 'symbol':'7', 'class':'numberButton', 'action':function() { calculator.numberPressed('7'); } },
-		{ 'symbol':'4', 'class':'numberButton', 'action':function() { calculator.numberPressed('4'); } },
-		{ 'symbol':'1', 'class':'numberButton', 'action':function() { calculator.numberPressed('1'); } },
+		{ 'symbol':'M-', 'class':'grey', 'action':function() { calculator.memory('-'); } },
+		{ 'symbol':'+/-', 'class':'orange', 'action':function() { calculator.negate(); } },
+		{ 'symbol':'9', 'class':'blue', 'action':function() { calculator.numberPressed('9'); } },
+		{ 'symbol':'6', 'class':'blue', 'action':function() { calculator.numberPressed('6'); } },
+		{ 'symbol':'3', 'class':'blue', 'action':function() { calculator.numberPressed('3'); } },
+		{ 'symbol':'.', 'class':'blue', 'action':function() { calculator.numberPressed('.'); } },
+		{ 'symbol':'M+', 'class':'grey', 'action':function() { calculator.memory('+'); } },
+		{ 'symbol':'sqrt', 'class':'orange', 'action':function() { calculator.sqrt(); } },
+		{ 'symbol':'8', 'class':'blue', 'action':function() { calculator.numberPressed('8'); } },
+		{ 'symbol':'5', 'class':'blue', 'action':function() { calculator.numberPressed('5'); } },
+		{ 'symbol':'2', 'class':'blue', 'action':function() { calculator.numberPressed('2'); } },
+		{ 'symbol':'0', 'stretch':'horizontal', 'class':'blue', 'action':function() { calculator.numberPressed('0'); } },
+		{ 'symbol':'MR/MC', 'class':'grey', 'action':function() { calculator.memory('rc'); } },
+		{ 'symbol':'AC', 'class':'orange', 'action':function() { calculator.reset(); } },
+		{ 'symbol':'7', 'class':'blue', 'action':function() { calculator.numberPressed('7'); } },
+		{ 'symbol':'4', 'class':'blue', 'action':function() { calculator.numberPressed('4'); } },
+		{ 'symbol':'1', 'class':'blue', 'action':function() { calculator.numberPressed('1'); } },
 		{ 'stretch':'skip' }
 	];
 
@@ -63,10 +63,8 @@ boidem.adlessCalc = (function() {
 				continue;
 			}
 			NODEBUG || console.log("make button " + i + " for symbol " + definition.symbol);
-            $('body').append('<div id="button' + i + '" class="' + definition.class + '">' + definition.symbol + '</div>');
+            $('body').append('<a id="button' + i + '" class="button ' + definition.class + '">' + definition.symbol + '</div>');
             var button = $('#button' + i);
-            button.css({"background-color":"green"});
-			button.css({'border-style': 'solid', 'border-width': '2px'});
             button.css({'position': 'absolute'});
 			button.css({'text-align':'center'});
 			button.click(definition.action);

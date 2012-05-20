@@ -75,6 +75,114 @@ td { vertical-align: top; }
    ========================================================================== */
 
 
+.button{
+	font:15px Calibri, Arial, sans-serif;
+
+	/* A semi-transparent text shadow */
+	text-shadow:1px 1px 0 rgba(255,255,255,0.4);
+
+	/* Overriding the default underline styling of the links */
+	text-decoration:none !important;
+	white-space:nowrap;
+
+	display:inline-block;
+	vertical-align:baseline;
+	position:relative;
+	cursor:pointer;
+	padding:10px 20px;
+
+	/* Applying a default border raidus of 8px */
+
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	border-radius:8px;
+
+	/* A 1px highlight inside of the button */
+
+	-moz-box-shadow:0 0 1px #fff inset;
+	-webkit-box-shadow:0 0 1px #fff inset;
+	box-shadow:0 0 1px #fff inset;
+
+	/* Animating the background positions with CSS3 */
+	/* Currently works only in Safari/Chrome */
+
+	-webkit-transition:background-position 1s;
+	-moz-transition:background-position 1s;
+	transition:background-position 1s;
+}
+
+.button:hover{
+
+	/* The first rule is a fallback, in case the browser
+	   does not support multiple backgrounds
+	*/
+
+	background-position:top left;
+	background-position:top left, bottom right, 0 0, 0 0;
+}
+
+.button:active{
+	/* Moving the button 1px to the bottom when clicked */
+	bottom:-1px;
+}
+
+/* The three buttons sizes */
+
+.button.big		{ font-size:30px;}
+.button.medium	{ font-size:18px;}
+.button.small	{ font-size:13px;}
+
+/* A more rounded button */
+
+
+/* Defining four button colors */
+
+
+/* BlueButton */
+
+.blue.button{
+	color:#0f4b6d !important;
+	border:1px solid #84acc3 !important;
+	background-color: #48b5f2;
+}
+
+.blue.button:hover{
+	background-color:#63c7fe;
+}
+
+/* Green Button */
+
+.green.button{
+	color:#345903 !important;
+	border:1px solid #96a37b !important;
+	background-color: #79be1e;
+}
+
+.green.button:hover{
+	background-color:#89d228;
+}
+
+/* Orange Button */
+
+.orange.button{
+	color:#693e0a !important;
+	border:1px solid #bea280 !important;
+	background-color: #e38d27;
+}
+
+.orange.button:hover{
+	background-color:#ec9732;
+}
+
+.grey.button{
+	color:#525252 !important;
+	border:1px solid #a5a5a5 !important;
+	background-color: #a9adb1;
+}
+
+.grey.button:hover{
+	background-color:#b6bbc0;
+}
 
 
 
@@ -109,7 +217,7 @@ td { vertical-align: top; }
 /* =============================================================================
    Print Styles
    ========================================================================== */
- 
+
 @media print {
   * { background: transparent !important; color: black !important; box-shadow:none !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } /* Black prints faster: h5bp.com/s */
   a, a:visited { text-decoration: underline; }
@@ -124,3 +232,4 @@ td { vertical-align: top; }
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3 { page-break-after: avoid; }
 }
+
