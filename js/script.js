@@ -1,6 +1,8 @@
 /* Author: Todd Foster
 
 TODO:
+o memory buttons
+o hide buttons for which there isn't space
 o push css into external css file
 o animate button positioning
 o font size for display
@@ -113,6 +115,8 @@ boidem.adlessCalc = (function() {
 				button.css({'top': dy + 'px'});
 
 				buttonsIndex += 1;
+				if (buttonsIndex === buttons.length)
+					return;
 			}
 		}
 	});
