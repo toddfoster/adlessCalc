@@ -41,7 +41,7 @@ boidem.adlessCalc = (function() {
 
 	var onDocumentReady = (function() {
 			$('body').prepend('<div id="display" class="display"></div>');
-			$(window).resize(onDocumentReady);
+			$(window).resize(onResize);
 
 			calculator.init();
 
@@ -83,18 +83,28 @@ boidem.adlessCalc = (function() {
 		var numCols = Math.min(Math.floor(screenWidth / cellWidth), Math.ceil(buttonDefinitions.length / numRows));
 		NODEBUG || console.log("Screen=" + screenWidth + "x" + screenHeight + "  cell=" + cellWidth + "x" + cellHeight + "  buttons=" + buttonWidth + "x" + buttonHeight + "  numCols=" + numCols);
 
+		var buttonsRight = 0.5 * (buttonMargin + (screenWidth - (cellWidth * numCols)));
+		var buttonsTop = 2.0 * cellHeight;
+		NODEBUG || console.log("    buttons right/top=" + buttonsRight + "," + buttonsTop);
+
+		// Hide everything
+		$('#display').hide();
+		var index;
+		for (index=0; index<buttons.length; index++)
+			buttons[index] && buttons[index].hide();
+
 		// Position display
 		$('#display').css({'height': (phi * cellHeight) + 'px'});
-		$('#display').css({'width': (screenWidth - (cellHeight / 2.0)) + 'px'});
+		//$('#display').css({'width': (screenWidth - (cellHeight / 2.0)) + 'px'});
+		$('#display').css({'width': (numCols * cellWidth - buttonMargin) + 'px'});
 		$('#display').css({'top': (cellHeight * (2.0 - phi) / 2.0) + 'px'});
-		$('#display').css({'right': (cellHeight / 4.0) + 'px'});
+		//$('#display').css({'right': (cellHeight / 4.0) + 'px'});
+		$('#display').css({'right': buttonsRight + 'px'});
+		$('#display').show();
 
 		// TODO: display font size -- rough heuristic depending on dimensions?
 
 		// Position buttons
-		var buttonsRight = 0.5 * (buttonMargin + (screenWidth - (cellWidth * numCols)));
-		var buttonsTop = 2.0 * cellHeight;
-		NODEBUG || console.log("    buttons right/top=" + buttonsRight + "," + buttonsTop);
 		var dx, dy;
 		var buttonsIndex = 0;
 		for (dx=buttonsRight; dx + cellWidth < screenWidth; dx += cellWidth) {
@@ -109,6 +119,7 @@ boidem.adlessCalc = (function() {
 					button.css({'height': height + 'px'});
 					button.css({'right': dx + 'px'});
 					button.css({'top'  : dy + 'px'});
+					button.show();
 				}
 
 				buttonsIndex += 1;
