@@ -9,10 +9,12 @@ A beautiful solution: web-app's on the home screen! An educational experiment as
 Begun 19 May 2012
 
 ## TODO
+* center-up keypad
 * manifest, headers to support offline mode
 * Clean up resize (hide elements during move?)
-* font size for display
 * push css into external css file
+* font size for display
+* key appearance
 * Add buttons in landscape mode
 * Switch from jquery to [zepto](http://zeptojs.com/)
 * memory indicator
@@ -21,6 +23,7 @@ Begun 19 May 2012
 * perf: must be snappy!
 * icon
 * unicode multiply,divide symbols
+* keyboard input (use form text field for display instead of simple div? catch operation keys?)
 * test, deal with floating point precision problems (return 1 instead of 0.9999...)
 
 ## MAYBE
