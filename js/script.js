@@ -87,8 +87,8 @@ boidem.adlessCalc = (function() {
 		var phi = (1.0 + Math.sqrt(5)) / 2.0;
 		NODEBUG || console.log("phi = " + phi);
 
-		var buttonHeight = Math.floor(screenHeight / 8);
-		var buttonWidth = Math.floor(Math.min(phi * buttonHeight, screenWidth / 4));
+		var buttonHeight = Math.floor(screenHeight / 8) - 1; // one less to account for slop
+		var buttonWidth = Math.floor(Math.min(phi * buttonHeight, screenWidth / 4)) - 1;
 		NODEBUG || console.log("Screen = " + screenWidth + "x" + screenHeight + "  button = " + buttonWidth + "x" + buttonHeight);
 
 		// Position display
