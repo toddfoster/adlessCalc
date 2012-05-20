@@ -1,16 +1,4 @@
 /* Author: Todd Foster
-
-TODO:
-o memory buttons
-o hide buttons for which there isn't space
-o push css into external css file
-o animate button positioning
-o font size for display
-o web-app, offline manifest
-o icon
-o unicode multiply,divide symbols
-o test, deal with floating point precision problems (return 1 instead of 0.9999...)
-o display/clear error conditions
 */
 
 /* global boidem */
