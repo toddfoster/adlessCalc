@@ -22,30 +22,30 @@ boidem.adlessCalc = (function() {
 	var display;
 	var buttons = [];
 	var buttonDefinitions = [
-		{ 'symbol':'=', 'class':'greenButton', 'action':function() { calculator.equals(); } },
-		{ 'symbol':'X', 'class':'greenButton', 'action':function() { calculator.operatorPressed(function(a, b) { return a * b; }) } },
-		{ 'symbol':'/', 'class':'greenButton', 'action':function() { calculator.operatorPressed(function(a, b) { return a / b; }) } },
-		{ 'symbol':'-', 'class':'greenButton', 'action':function() { calculator.operatorPressed(function(a, b) { return a - b; }) } },
-		{ 'symbol':'+', 'class':'greenButton', 'action':function() { calculator.operatorPressed(function(a, b) { return a + b; }) } },
-		{ 'symbol':'+', 'class':'greenButton', 'action':function() { calculator.operatorPressed(function(a, b) { return a + b; }) } },
-		{ 'symbol':'M-', 'class':'greenButton', 'action':function() { console.log("M- unimplemented"); } },
-		{ 'symbol':'+/-', 'class':'greenButton', 'action':function() { calculator.negate(); } },
-		{ 'symbol':'9', 'class':'greenButton', 'action':function() { calculator.numberPressed('9'); } },
-		{ 'symbol':'6', 'class':'greenButton', 'action':function() { calculator.numberPressed('6'); } },
-		{ 'symbol':'3', 'class':'greenButton', 'action':function() { calculator.numberPressed('3'); } },
-		{ 'symbol':'.', 'class':'greenButton', 'action':function() { calculator.numberPressed('.'); } },
-		{ 'symbol':'M+', 'class':'greenButton', 'action':function() { console.log("M+ unimplemented"); } },
-		{ 'symbol':'sqrt', 'class':'greenButton', 'action':function() { calculator.sqrt(); } },
-		{ 'symbol':'8', 'class':'greenButton', 'action':function() { calculator.numberPressed('8'); } },
-		{ 'symbol':'5', 'class':'greenButton', 'action':function() { calculator.numberPressed('5'); } },
-		{ 'symbol':'2', 'class':'greenButton', 'action':function() { calculator.numberPressed('2'); } },
-		{ 'symbol':'0', 'class':'greenButton', 'action':function() { calculator.numberPressed('0'); } },
-		{ 'symbol':'MR/MC', 'class':'greenButton', 'action':function() { console.log("MC unimplemented"); } },
-		{ 'symbol':'AC', 'class':'greenButton', 'action':function() { calculator.reset(); } },
-		{ 'symbol':'7', 'class':'greenButton', 'action':function() { calculator.numberPressed('7'); } },
-		{ 'symbol':'4', 'class':'greenButton', 'action':function() { calculator.numberPressed('4'); } },
-		{ 'symbol':'1', 'class':'greenButton', 'action':function() { calculator.numberPressed('1'); } },
-		{ 'symbol':'0', 'class':'greenButton', 'action':function() { calculator.numberPressed('0'); } },
+		{ 'symbol':'=', 'class':'otherButton', 'action':function() { calculator.equals(); } },
+		{ 'symbol':'X', 'class':'operationButton', 'action':function() { calculator.operatorPressed(function(a, b) { return a * b; }) } },
+		{ 'symbol':'/', 'class':'operationButton', 'action':function() { calculator.operatorPressed(function(a, b) { return a / b; }) } },
+		{ 'symbol':'-', 'class':'operationButton', 'action':function() { calculator.operatorPressed(function(a, b) { return a - b; }) } },
+		{ 'symbol':'+', 'stretch':'vertical', 'class':'tallOperationButton', 'action':function() { calculator.operatorPressed(function(a, b) { return a + b; }) } },
+		{ 'stretch':'skip' },
+		{ 'symbol':'M-', 'class':'memoryButton', 'action':function() { console.log("M- unimplemented"); } },
+		{ 'symbol':'+/-', 'class':'operationButton', 'action':function() { calculator.negate(); } },
+		{ 'symbol':'9', 'class':'numberButton', 'action':function() { calculator.numberPressed('9'); } },
+		{ 'symbol':'6', 'class':'numberButton', 'action':function() { calculator.numberPressed('6'); } },
+		{ 'symbol':'3', 'class':'numberButton', 'action':function() { calculator.numberPressed('3'); } },
+		{ 'symbol':'.', 'class':'numberButton', 'action':function() { calculator.numberPressed('.'); } },
+		{ 'symbol':'M+', 'class':'memoryButton', 'action':function() { console.log("M+ unimplemented"); } },
+		{ 'symbol':'sqrt', 'class':'operationButton', 'action':function() { calculator.sqrt(); } },
+		{ 'symbol':'8', 'class':'numberButton', 'action':function() { calculator.numberPressed('8'); } },
+		{ 'symbol':'5', 'class':'numberButton', 'action':function() { calculator.numberPressed('5'); } },
+		{ 'symbol':'2', 'class':'numberButton', 'action':function() { calculator.numberPressed('2'); } },
+		{ 'symbol':'0', 'stretch':'horizontal', 'class':'longNumberButton', 'action':function() { calculator.numberPressed('0'); } },
+		{ 'symbol':'MR/MC', 'class':'memoryButton', 'action':function() { console.log("MC unimplemented"); } },
+		{ 'symbol':'AC', 'class':'clearButton', 'action':function() { calculator.reset(); } },
+		{ 'symbol':'7', 'class':'numberButton', 'action':function() { calculator.numberPressed('7'); } },
+		{ 'symbol':'4', 'class':'numberButton', 'action':function() { calculator.numberPressed('4'); } },
+		{ 'symbol':'1', 'class':'numberButton', 'action':function() { calculator.numberPressed('1'); } },
+		{ 'stretch':'skip' }
 	];
 
 
@@ -70,6 +70,10 @@ boidem.adlessCalc = (function() {
 		var i;
 		for (i=0; i<buttonDefinitions.length; i+=1) {
 			var definition = buttonDefinitions[i];
+			if (definition.stretch === 'skip') {
+				buttons[i] = null;
+				continue;
+			}
 			NODEBUG || console.log("make button " + i + " for symbol " + definition.symbol);
             $('body').append('<div id="button' + i + '" class="' + definition.class + '">' + definition.symbol + '</div>');
             var button = $('#button' + i);
@@ -107,12 +111,16 @@ boidem.adlessCalc = (function() {
 		var dx, dy;
 		var buttonsIndex = 0;
 		for (dx=0; dx + buttonWidth < screenWidth; dx += buttonWidth) {
-			for (dy=buttonsTop; dy + buttonHeight <  screenHeight; dy += buttonHeight) {
+			for (dy=buttonsTop; dy + buttonHeight < screenHeight; dy += buttonHeight) {
 				var button = buttons[buttonsIndex];
-				button.css({'width': buttonWidth + 'px'});
-				button.css({'height': buttonHeight + 'px'});
-				button.css({'right': dx + 'px'});
-				button.css({'top': dy + 'px'});
+				if (button !== null) {
+					var height = buttonHeight * (buttonDefinitions[buttonsIndex].stretch === 'vertical'   ? 2.0 : 1.0);
+					var width  = buttonWidth  * (buttonDefinitions[buttonsIndex].stretch === 'horizontal' ? 2.0 : 1.0);
+					button.css({'width' : width  + 'px'});
+					button.css({'height': height + 'px'});
+					button.css({'right': dx + 'px'});
+					button.css({'top'  : dy + 'px'});
+				}
 
 				buttonsIndex += 1;
 				if (buttonsIndex === buttons.length)
