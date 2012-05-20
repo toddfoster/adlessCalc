@@ -11,7 +11,6 @@ boidem.adlessCalc = (function() {
 	var minCols = 4;
 	var buttonMarginRatio = 0.15;
 
-	var display;
 	var buttons = [];
 	var buttonDefinitions = [
 		{ 'symbol':'=', 'class':'grey', 'action':function() { calculator.equals(); } },
@@ -42,13 +41,9 @@ boidem.adlessCalc = (function() {
 
 	var onDocumentReady = (function() {
 			$('body').prepend('<div id="display" class="display"></div>');
-			display = $('#display');
-			display.css({'border-style': 'solid', 'border-width': '2px'});
-			display.css({'text-align':'right'});
-			display.css({'position': 'absolute'});
 			$(window).resize(onDocumentReady);
 
-			calculator.init(display);
+			calculator.init();
 
 			makeButtons();
 
@@ -89,10 +84,10 @@ boidem.adlessCalc = (function() {
 		NODEBUG || console.log("Screen=" + screenWidth + "x" + screenHeight + "  cell=" + cellWidth + "x" + cellHeight + "  buttons=" + buttonWidth + "x" + buttonHeight + "  numCols=" + numCols);
 
 		// Position display
-		display.css({'height': (phi * cellHeight) + 'px'});
-		display.css({'width': (screenWidth - (cellHeight / 2.0)) + 'px'});
-		display.css({'top': (cellHeight * (2.0 - phi) / 2.0) + 'px'});
-		display.css({'right': (cellHeight / 4.0) + 'px'});
+		$('#display').css({'height': (phi * cellHeight) + 'px'});
+		$('#display').css({'width': (screenWidth - (cellHeight / 2.0)) + 'px'});
+		$('#display').css({'top': (cellHeight * (2.0 - phi) / 2.0) + 'px'});
+		$('#display').css({'right': (cellHeight / 4.0) + 'px'});
 
 		// TODO: display font size -- rough heuristic depending on dimensions?
 
@@ -124,7 +119,6 @@ boidem.adlessCalc = (function() {
 	});
 
 	var calculator = (function() {
-		var display;
 		var input;
 		var accumulator;
 		var operation;
@@ -133,8 +127,7 @@ boidem.adlessCalc = (function() {
 		var error;
 		var lastButton;
 
-		var init = (function(displayTarget) {
-			display = displayTarget;
+		var init = (function() {
 			input = '0';
 			accumulator = 0.0;
 			operation = null;
@@ -228,11 +221,11 @@ boidem.adlessCalc = (function() {
 		});
 
 		var showInput = (function() {
-			display.text(input);
+			$('#display').text(input);
 		});
 
 		return {
-			init:function(displayTarget) { init(displayTarget); },
+			init:function() { init(); },
 			numberPressed:function(value) { numberPressed(value); },
 			operatorPressed:function(value) { operatorPressed(value); },
 			equals:function() { equals(); },

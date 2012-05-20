@@ -9,10 +9,8 @@ A beautiful solution: web-app's on the home screen! An educational experiment as
 Begun 19 May 2012
 
 ## TODO
-* center-up keypad
 * manifest, headers to support offline mode
 * Clean up resize (hide elements during move?)
-* push css into external css file
 * font size for display
 * key appearance
 * Add buttons in landscape mode
@@ -37,6 +35,8 @@ Begun 19 May 2012
 * Hook up basic calculator
 * Respond to changing viewport size
 * memory buttons
+* center-up keypad
+* push css into external css file
 
 ## Credits
 * [HTML5 boilerplate]:(http://html5boilerplate.com/)
