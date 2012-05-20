@@ -28,19 +28,19 @@ boidem.adlessCalc = (function() {
 		{ 'symbol':'-', 'class':'operationButton', 'action':function() { calculator.operatorPressed(function(a, b) { return a - b; }) } },
 		{ 'symbol':'+', 'stretch':'vertical', 'class':'tallOperationButton', 'action':function() { calculator.operatorPressed(function(a, b) { return a + b; }) } },
 		{ 'stretch':'skip' },
-		{ 'symbol':'M-', 'class':'memoryButton', 'action':function() { console.log("M- unimplemented"); } },
+		{ 'symbol':'M-', 'class':'memoryButton', 'action':function() { calculator.memory('-'); } },
 		{ 'symbol':'+/-', 'class':'operationButton', 'action':function() { calculator.negate(); } },
 		{ 'symbol':'9', 'class':'numberButton', 'action':function() { calculator.numberPressed('9'); } },
 		{ 'symbol':'6', 'class':'numberButton', 'action':function() { calculator.numberPressed('6'); } },
 		{ 'symbol':'3', 'class':'numberButton', 'action':function() { calculator.numberPressed('3'); } },
 		{ 'symbol':'.', 'class':'numberButton', 'action':function() { calculator.numberPressed('.'); } },
-		{ 'symbol':'M+', 'class':'memoryButton', 'action':function() { console.log("M+ unimplemented"); } },
+		{ 'symbol':'M+', 'class':'memoryButton', 'action':function() { calculator.memory('+'); } },
 		{ 'symbol':'sqrt', 'class':'operationButton', 'action':function() { calculator.sqrt(); } },
 		{ 'symbol':'8', 'class':'numberButton', 'action':function() { calculator.numberPressed('8'); } },
 		{ 'symbol':'5', 'class':'numberButton', 'action':function() { calculator.numberPressed('5'); } },
 		{ 'symbol':'2', 'class':'numberButton', 'action':function() { calculator.numberPressed('2'); } },
 		{ 'symbol':'0', 'stretch':'horizontal', 'class':'longNumberButton', 'action':function() { calculator.numberPressed('0'); } },
-		{ 'symbol':'MR/MC', 'class':'memoryButton', 'action':function() { console.log("MC unimplemented"); } },
+		{ 'symbol':'MR/MC', 'class':'memoryButton', 'action':function() { calculator.memory('rc'); } },
 		{ 'symbol':'AC', 'class':'clearButton', 'action':function() { calculator.reset(); } },
 		{ 'symbol':'7', 'class':'numberButton', 'action':function() { calculator.numberPressed('7'); } },
 		{ 'symbol':'4', 'class':'numberButton', 'action':function() { calculator.numberPressed('4'); } },
@@ -135,20 +135,25 @@ boidem.adlessCalc = (function() {
 		var accumulator;
 		var operation;
 		var newInput;
+		var memoryStore;
 		var error;
+		var lastButton;
 
 		var init = (function(displayTarget) {
 			display = displayTarget;
 			input = '0';
-			accumulator = 0;
+			accumulator = 0.0;
 			operation = null;
 			newInput = false;
+			memoryStore = 0.0;
 			error = false;
+			lastButton = null;
 			showInput();
 		});
 
 		var numberPressed = (function(value) {
 			NODEBUG || console.log("numberPressed: " + value);
+			lastButton = value;
 			if (newInput || (input === '0' && value !== '.'))
 				input = value;
 			else
@@ -158,6 +163,7 @@ boidem.adlessCalc = (function() {
 		});
 
 		var operatorPressed = (function(value) {
+			lastButton = value;
 			var inputValue = parseFloat(input);
 			NODEBUG || console.log("operatorPressed: " + accumulator + value + inputValue);
 			if (operation)
@@ -173,15 +179,21 @@ boidem.adlessCalc = (function() {
 		});
 
 		var equals = (function() {
+			lastButton = 'equals';
+			equalsCore();
+			showInput();
+		});
+
+		var equalsCore = (function() {
 			if (operation)
 				input = operation(accumulator, parseFloat(input));
 			newInput = true;
 			operation = null;
 			accumulator = 0;
-			showInput();
 		});
 
 		var negate = (function() {
+			lastButton = 'negate';
 			if (input[0] == '-')
 				input = input.slice(1);
 			else
@@ -189,9 +201,9 @@ boidem.adlessCalc = (function() {
 			showInput();
 		});
 
-
 		var sqrt = (function() {
-			equals();
+			equalsCore();
+			lastButton = 'sqrt';
 			var inputValue = parseFloat(input);
 			if (inputValue < 0) {
 				error = true;
@@ -200,6 +212,25 @@ boidem.adlessCalc = (function() {
 			else
 				input = Math.sqrt(parseFloat(input));
 			showInput();
+		});
+
+		var memory = (function(value) {
+			NODEBUG || console.log("memoryPressed:" + value);
+			if (value === 'rc') {
+				if (lastButton === 'rc')
+					memoryStore = 0.0;
+				else {
+					input = memoryStore.toString() || '0';
+					showInput();
+				}
+				newInput = true;
+			}
+			else {
+				if (operation)
+					equals();
+				memoryStore += parseFloat(input) * (value === '+' ? 1.0 : -1.0);
+			}
+			lastButton = value;
 		});
 
 		var showInput = (function() {
@@ -214,6 +245,7 @@ boidem.adlessCalc = (function() {
 			negate:function() { negate(); },
 			sqrt:function() { sqrt(); },
 			reset:function() { init(display); },
+			memory:function(value) { memory(value); },
 		};
 }());
 
