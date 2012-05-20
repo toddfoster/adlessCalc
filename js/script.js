@@ -6,6 +6,10 @@ boidem = {};
 
 boidem.adlessCalc = (function() {
 	var NODEBUG = 0;
+	var displayHeight = 2;
+	var numRows = 6;
+	var minCols = 4;
+	var buttonMarginRatio = 0.15;
 
 	var display;
 	var buttons = [];
@@ -36,7 +40,6 @@ boidem.adlessCalc = (function() {
 		{ 'stretch':'skip' }
 	];
 
-
 	var onDocumentReady = (function() {
 			$('body').prepend('<div id="display" class="display"></div>');
 			display = $('#display');
@@ -65,8 +68,6 @@ boidem.adlessCalc = (function() {
 			NODEBUG || console.log("make button " + i + " for symbol " + definition.symbol);
             $('body').append('<a id="button' + i + '" class="button ' + definition.class + '">' + definition.symbol + '</div>');
             var button = $('#button' + i);
-            button.css({'position': 'absolute'});
-			button.css({'text-align':'center'});
 			button.click(definition.action);
 			buttons[i] = button;
 		}
@@ -79,29 +80,36 @@ boidem.adlessCalc = (function() {
 		var phi = (1.0 + Math.sqrt(5)) / 2.0;
 		NODEBUG || console.log("phi = " + phi);
 
-		var buttonHeight = Math.floor(screenHeight / 8) - 1; // one less to account for slop
-		var buttonWidth = Math.floor(Math.min(phi * buttonHeight, screenWidth / 4)) - 1;
-		NODEBUG || console.log("Screen = " + screenWidth + "x" + screenHeight + "  button = " + buttonWidth + "x" + buttonHeight);
+		var cellHeight = Math.floor(screenHeight / (numRows + displayHeight)) - 1; // one px less to ensure sufficient space
+		var cellWidth = Math.floor(Math.min(phi * cellHeight, screenWidth / minCols)) - 1;
+		var buttonHeight = (1.0 - buttonMarginRatio) * cellHeight;
+		var buttonWidth = (1.0 - buttonMarginRatio) * cellWidth;
+		var buttonMargin = buttonMarginRatio * cellHeight;
+		var numCols = Math.min(Math.floor(screenWidth / cellWidth), Math.ceil(buttonDefinitions.length / numRows));
+		NODEBUG || console.log("Screen=" + screenWidth + "x" + screenHeight + "  cell=" + cellWidth + "x" + cellHeight + "  buttons=" + buttonWidth + "x" + buttonHeight + "  numCols=" + numCols);
 
 		// Position display
-		display.css({'height': (phi * buttonHeight) + 'px'});
-		display.css({'width': (screenWidth - (buttonHeight / 2.0)) + 'px'});
-		display.css({'top': (buttonHeight * (2.0 - phi) / 2.0) + 'px'});
-		display.css({'right': (buttonHeight / 4.0) + 'px'});
+		display.css({'height': (phi * cellHeight) + 'px'});
+		display.css({'width': (screenWidth - (cellHeight / 2.0)) + 'px'});
+		display.css({'top': (cellHeight * (2.0 - phi) / 2.0) + 'px'});
+		display.css({'right': (cellHeight / 4.0) + 'px'});
 
 		// TODO: display font size -- rough heuristic depending on dimensions?
 
 		// Position buttons
-		// TODO: Animate!
-		var buttonsTop = 2.0 * buttonHeight;
+		var buttonsRight = 0.5 * (buttonMargin + (screenWidth - (cellWidth * numCols)));
+		var buttonsTop = 2.0 * cellHeight + 0.5 * buttonMargin;
+		NODEBUG || console.log("    buttons right/top=" + buttonsRight + "," + buttonsTop);
 		var dx, dy;
 		var buttonsIndex = 0;
-		for (dx=0; dx + buttonWidth < screenWidth; dx += buttonWidth) {
-			for (dy=buttonsTop; dy + buttonHeight < screenHeight; dy += buttonHeight) {
+		for (dx=buttonsRight; dx + cellWidth < screenWidth; dx += cellWidth) {
+			for (dy=buttonsTop; dy + cellHeight < screenHeight; dy += cellHeight) {
 				var button = buttons[buttonsIndex];
 				if (button !== null) {
-					var height = buttonHeight * (buttonDefinitions[buttonsIndex].stretch === 'vertical'   ? 2.0 : 1.0);
-					var width  = buttonWidth  * (buttonDefinitions[buttonsIndex].stretch === 'horizontal' ? 2.0 : 1.0);
+					var width  = cellWidth  * (buttonDefinitions[buttonsIndex].stretch === 'horizontal' ? 2.0 : 1.0);
+					var height = cellHeight * (buttonDefinitions[buttonsIndex].stretch === 'vertical'   ? 2.0 : 1.0);
+					width  -= buttonMargin;
+					height -= buttonMargin;
 					button.css({'width' : width  + 'px'});
 					button.css({'height': height + 'px'});
 					button.css({'right': dx + 'px'});

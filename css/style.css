@@ -76,6 +76,8 @@ td { vertical-align: top; }
 
 
 .button{
+	position:absolute;
+
 	font:15px Calibri, Arial, sans-serif;
 
 	/* A semi-transparent text shadow */
@@ -86,10 +88,11 @@ td { vertical-align: top; }
 	white-space:nowrap;
 
 	display:inline-block;
-	vertical-align:baseline;
-	position:relative;
 	cursor:pointer;
+	/*
 	padding:10px 20px;
+*/
+	text-align:center;
 
 	/* Applying a default border raidus of 8px */
 
@@ -102,43 +105,16 @@ td { vertical-align: top; }
 	-moz-box-shadow:0 0 1px #fff inset;
 	-webkit-box-shadow:0 0 1px #fff inset;
 	box-shadow:0 0 1px #fff inset;
-
-	/* Animating the background positions with CSS3 */
-	/* Currently works only in Safari/Chrome */
-
-	-webkit-transition:background-position 1s;
-	-moz-transition:background-position 1s;
-	transition:background-position 1s;
 }
 
 .button:hover{
 
-	/* The first rule is a fallback, in case the browser
-	   does not support multiple backgrounds
-	*/
-
-	background-position:top left;
-	background-position:top left, bottom right, 0 0, 0 0;
 }
 
 .button:active{
 	/* Moving the button 1px to the bottom when clicked */
 	bottom:-1px;
 }
-
-/* The three buttons sizes */
-
-.button.big		{ font-size:30px;}
-.button.medium	{ font-size:18px;}
-.button.small	{ font-size:13px;}
-
-/* A more rounded button */
-
-
-/* Defining four button colors */
-
-
-/* BlueButton */
 
 .blue.button{
 	color:#0f4b6d !important;
@@ -150,8 +126,6 @@ td { vertical-align: top; }
 	background-color:#63c7fe;
 }
 
-/* Green Button */
-
 .green.button{
 	color:#345903 !important;
 	border:1px solid #96a37b !important;
@@ -161,8 +135,6 @@ td { vertical-align: top; }
 .green.button:hover{
 	background-color:#89d228;
 }
-
-/* Orange Button */
 
 .orange.button{
 	color:#693e0a !important;
