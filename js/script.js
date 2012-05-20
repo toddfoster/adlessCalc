@@ -98,7 +98,7 @@ boidem.adlessCalc = (function() {
 
 		// Position buttons
 		var buttonsRight = 0.5 * (buttonMargin + (screenWidth - (cellWidth * numCols)));
-		var buttonsTop = 2.0 * cellHeight + 0.5 * buttonMargin;
+		var buttonsTop = 2.0 * cellHeight;
 		NODEBUG || console.log("    buttons right/top=" + buttonsRight + "," + buttonsTop);
 		var dx, dy;
 		var buttonsIndex = 0;
