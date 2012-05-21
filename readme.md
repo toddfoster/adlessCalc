@@ -41,7 +41,9 @@ Begun 19 May 2012
 * push css into external css file
 * Clean up resize (hide elements during move?)
 * font size for display
+* disable reposition app by dragging
 
 ## Credits
 * [HTML5 boilerplate]:(http://html5boilerplate.com/)
 * Help with [buttons]:(http://tutorialzine.com/2010/10/css3-animated-bubble-buttons/)
+* [WebApp adaptation]:(http://matt.might.net/articles/how-to-native-iphone-ipad-apps-in-javascript/)
