@@ -10,9 +10,8 @@ Begun 19 May 2012
 
 ## TODO
 * manifest, headers to support offline mode
-* Clean up resize (hide elements during move?)
 * font size for display
-* key appearance
+* shiny keys
 * Add buttons in landscape mode
 * Switch from jquery to [zepto](http://zeptojs.com/)
 * memory indicator
@@ -36,7 +35,9 @@ Begun 19 May 2012
 * Respond to changing viewport size
 * memory buttons
 * center-up keypad
+* key appearance
 * push css into external css file
+* Clean up resize (hide elements during move?)
 
 ## Credits
 * [HTML5 boilerplate]:(http://html5boilerplate.com/)

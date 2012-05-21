@@ -79,7 +79,7 @@ body { background:black; }
 .display{
 	position:absolute;
 
-	background-color:rgb(255, 255, 204);
+	background-color:#ffc;
 
 	-moz-border-radius:8px;
 	-webkit-border-radius:8px;
