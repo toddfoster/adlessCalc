@@ -10,6 +10,7 @@ Begun 19 May 2012
 
 ## TODO
 * unicode multiply,divide symbols
+* monospace font in display
 * perf: must be snappy!
 * manifest, headers to support offline mode
 * shiny keys
@@ -18,7 +19,7 @@ Begun 19 May 2012
 * memory indicator
 * display/clear error conditions
 * icon
-* Alert user of process to save webapp on home screen if not window.navigator.standalone
+* Alert user of process to save webapp on home screen if not window.navigator.standalone: http://cubiq.org/add-to-home-screen
 * keyboard input (use form text field for display instead of simple div? catch operation keys?)
 * test, deal with floating point precision problems (return 1 instead of 0.9999...)
 * limit number digits to width of screen / precision
