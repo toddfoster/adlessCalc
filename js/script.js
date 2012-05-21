@@ -5,7 +5,7 @@
 boidem = {};
 
 boidem.adlessCalc = (function() {
-	var NODEBUG = 0;
+	var DEBUG = 0;
 	var displayRows = 2;
 	var numRows = 6;
 	var minCols = 4;
@@ -48,7 +48,7 @@ boidem.adlessCalc = (function() {
 
 			onResize();
 
-			NODEBUG || console.log("onDocumentReady finished");
+			DEBUG && console.log("onDocumentReady finished");
 	});
 
 	var makeButtons = (function() {
@@ -57,7 +57,7 @@ boidem.adlessCalc = (function() {
 			var definition = buttonDefinitions[i];
 			if (definition.stretch === 'skip')
 				continue;
-			NODEBUG || console.log("make button " + i + " for symbol " + definition.symbol);
+			DEBUG && console.log("make button " + i + " for symbol " + definition.symbol);
             $('body').append('<a id="button' + i + '" class="button ' + definition.class + '"><div class="vcenter">' + definition.symbol + '</div></a>');
             var button = $('#button' + i);
 			button.click(definition.action);
@@ -76,11 +76,11 @@ boidem.adlessCalc = (function() {
 		var buttonWidth = (1.0 - buttonMarginRatio) * cellWidth;
 		var buttonMargin = buttonMarginRatio * cellHeight;
 		var numCols = Math.min(Math.floor(screenWidth / cellWidth), Math.ceil(buttonDefinitions.length / numRows));
-		NODEBUG || console.log("Screen=" + screenWidth + "x" + screenHeight + "  cell=" + cellWidth + "x" + cellHeight + "  buttons=" + buttonWidth + "x" + buttonHeight + "  numCols=" + numCols);
+		DEBUG && console.log("Screen=" + screenWidth + "x" + screenHeight + "  cell=" + cellWidth + "x" + cellHeight + "  buttons=" + buttonWidth + "x" + buttonHeight + "  numCols=" + numCols);
 
 		var buttonsRight = 0.5 * (buttonMargin + (screenWidth - (cellWidth * numCols)));
 		var buttonsTop = 2.0 * cellHeight;
-		NODEBUG || console.log("    buttons right/top=" + buttonsRight + "," + buttonsTop);
+		DEBUG && console.log("    buttons right/top=" + buttonsRight + "," + buttonsTop);
 
 		// Hide everything
 		$('#displayContainer').hide();
@@ -103,7 +103,7 @@ boidem.adlessCalc = (function() {
 		var dx, dy;
 		var buttonsIndex = 0;
 		for (dx=buttonsRight; dx + cellWidth < screenWidth; dx += cellWidth) {
-			NODEBUG || console.log("    dx=" + dx);
+			DEBUG && console.log("    dx=" + dx);
 			for (dy=buttonsTop; dy + cellHeight < screenHeight; dy += cellHeight) {
 				var width  = cellWidth  * (buttonDefinitions[buttonsIndex].stretch === 'horizontal' ? 2.0 : 1.0);
 				var height = cellHeight * (buttonDefinitions[buttonsIndex].stretch === 'vertical'   ? 2.0 : 1.0);
@@ -145,7 +145,7 @@ boidem.adlessCalc = (function() {
 		});
 
 		var numberPressed = (function(value) {
-			NODEBUG || console.log("numberPressed: " + value);
+			DEBUG && console.log("numberPressed: " + value);
 			lastButton = value;
 			if (newInput || (input === '0' && value !== '.'))
 				input = value;
@@ -158,7 +158,7 @@ boidem.adlessCalc = (function() {
 		var operatorPressed = (function(value) {
 			lastButton = value;
 			var inputValue = parseFloat(input);
-			NODEBUG || console.log("operatorPressed: " + accumulator + value + inputValue);
+			DEBUG && console.log("operatorPressed: " + accumulator + value + inputValue);
 			if (operation)
 				accumulator = operation(accumulator, inputValue);
 			else
@@ -168,7 +168,7 @@ boidem.adlessCalc = (function() {
 			input = accumulator;
 			newInput = true;
 			showInput();
-			NODEBUG || console.log("    result -> " + input);
+			DEBUG && console.log("    result -> " + input);
 		});
 
 		var equals = (function() {
@@ -208,7 +208,7 @@ boidem.adlessCalc = (function() {
 		});
 
 		var memory = (function(value) {
-			NODEBUG || console.log("memoryPressed:" + value);
+			DEBUG && console.log("memoryPressed:" + value);
 			if (value === 'rc') {
 				if (lastButton === 'rc')
 					memoryStore = 0.0;
