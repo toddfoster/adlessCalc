@@ -78,8 +78,7 @@ boidem.adlessCalc = (function() {
 		var numCols = Math.min(Math.floor(screenWidth / cellWidth), Math.ceil(buttonDefinitions.length / numRows));
 		NODEBUG || console.log("Screen=" + screenWidth + "x" + screenHeight + "  cell=" + cellWidth + "x" + cellHeight + "  buttons=" + buttonWidth + "x" + buttonHeight + "  numCols=" + numCols);
 
-		//var buttonsRight = 0.5 * (buttonMargin + (screenWidth - (cellWidth * numCols)));
-		var buttonsRight = 0.0; //TODO rm
+		var buttonsRight = 0.5 * (buttonMargin + (screenWidth - (cellWidth * numCols)));
 		var buttonsTop = 2.0 * cellHeight;
 		NODEBUG || console.log("    buttons right/top=" + buttonsRight + "," + buttonsTop);
 
