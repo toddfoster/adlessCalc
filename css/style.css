@@ -76,7 +76,7 @@ td { vertical-align: top; }
 
 body { background:black; }
 
-.display{
+.displayContainer{
 	position:absolute;
 
 	background-color:#ffc;
@@ -88,6 +88,10 @@ body { background:black; }
 	border-width:2px;
 
 	text-align:right;
+}
+
+.display{
+	margin:0px 10px;
 }
 
 .button{

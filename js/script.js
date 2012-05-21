@@ -6,7 +6,7 @@ boidem = {};
 
 boidem.adlessCalc = (function() {
 	var NODEBUG = 0;
-	var displayHeight = 2;
+	var displayRows = 2;
 	var numRows = 6;
 	var minCols = 4;
 	var buttonMarginRatio = 0.15;
@@ -39,7 +39,7 @@ boidem.adlessCalc = (function() {
 	];
 
 	var onDocumentReady = (function() {
-			$('body').prepend('<div id="display" class="display"></div>');
+			$('body').prepend('<div id="displayContainer" class="displayContainer"><div id="display" class="display"></div></div>');
 			$(window).resize(onResize);
 
 			calculator.init();
@@ -58,7 +58,7 @@ boidem.adlessCalc = (function() {
 			if (definition.stretch === 'skip')
 				continue;
 			NODEBUG || console.log("make button " + i + " for symbol " + definition.symbol);
-            $('body').append('<a id="button' + i + '" class="button ' + definition.class + '">' + definition.symbol + '</div>');
+            $('body').append('<a id="button' + i + '" class="button ' + definition.class + '"><div class="vcenter">' + definition.symbol + '</div></a>');
             var button = $('#button' + i);
 			button.click(definition.action);
 		}
@@ -69,9 +69,9 @@ boidem.adlessCalc = (function() {
 		var screenHeight = $(window).height();
 
 		var phi = (1.0 + Math.sqrt(5)) / 2.0;
-		NODEBUG || console.log("phi = " + phi);
 
-		var cellHeight = Math.floor(screenHeight / (numRows + displayHeight)) - 1; // one px less to ensure sufficient space
+		var cellHeight = Math.floor(screenHeight / (numRows + displayRows)) - 1; // one px less to ensure sufficient space
+		console.log("-> " + screenHeight + " " + numRows + " " + displayRows + " " + cellHeight); //TODO rm 
 		var cellWidth = Math.floor(Math.min(phi * cellHeight, screenWidth / minCols)) - 1;
 		var buttonHeight = (1.0 - buttonMarginRatio) * cellHeight;
 		var buttonWidth = (1.0 - buttonMarginRatio) * cellWidth;
@@ -84,19 +84,19 @@ boidem.adlessCalc = (function() {
 		NODEBUG || console.log("    buttons right/top=" + buttonsRight + "," + buttonsTop);
 
 		// Hide everything
-		$('#display').hide();
+		$('#displayContainer').hide();
 		var index;
 		for (index=0; index<buttonDefinitions.length; index++)
 			$('#button' + index).hide();
 
 		// Position display
-		$('#display').css({'height': (phi * cellHeight) + 'px'});
-		//$('#display').css({'width': (screenWidth - (cellHeight / 2.0)) + 'px'});
-		$('#display').css({'width': (numCols * cellWidth - buttonMargin) + 'px'});
-		$('#display').css({'top': (cellHeight * (2.0 - phi) / 2.0) + 'px'});
-		//$('#display').css({'right': (cellHeight / 4.0) + 'px'});
-		$('#display').css({'right': buttonsRight + 'px'});
-		$('#display').show();
+		var displayHeight = (phi * cellHeight) + 'px';
+		$('#displayContainer').css({'height': displayHeight});
+		$('#displayContainer').css({'width': (numCols * cellWidth - buttonMargin) + 'px'});
+		$('#displayContainer').css({'top': (cellHeight * (2.0 - phi) / 2.0) + 'px'});
+		$('#displayContainer').css({'right': buttonsRight + 'px'});
+		$('#display').css({'line-height': displayHeight});
+		$('#displayContainer').show();
 
 		// TODO: display font size -- rough heuristic depending on dimensions?
 
@@ -113,6 +113,7 @@ boidem.adlessCalc = (function() {
 				$('#button' + buttonsIndex).css({'height': height + 'px'});
 				$('#button' + buttonsIndex).css({'right': dx + 'px'});
 				$('#button' + buttonsIndex).css({'top'  : dy + 'px'});
+				$('#button' + buttonsIndex + ' > .vcenter').css({'line-height':height + 'px'});
 				$('#button' + buttonsIndex).show();
 
 				buttonsIndex += 1;
@@ -235,7 +236,7 @@ boidem.adlessCalc = (function() {
 			equals:function() { equals(); },
 			negate:function() { negate(); },
 			sqrt:function() { sqrt(); },
-			reset:function() { init(display); },
+			reset:function() { init(); },
 			memory:function(value) { memory(value); },
 		};
 }());
