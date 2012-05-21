@@ -30,7 +30,7 @@ boidem.adlessCalc = (function() {
 		{ 'symbol':'5', 'class':'blue', 'action':function() { calculator.numberPressed('5'); } },
 		{ 'symbol':'2', 'class':'blue', 'action':function() { calculator.numberPressed('2'); } },
 		{ 'symbol':'0', 'stretch':'horizontal', 'class':'blue', 'action':function() { calculator.numberPressed('0'); } },
-		{ 'symbol':'MR/MC', 'class':'grey', 'action':function() { calculator.memory('rc'); } },
+		{ 'symbol':'MRC', 'class':'grey', 'action':function() { calculator.memory('rc'); } },
 		{ 'symbol':'AC', 'class':'orange', 'action':function() { calculator.reset(); } },
 		{ 'symbol':'7', 'class':'blue', 'action':function() { calculator.numberPressed('7'); } },
 		{ 'symbol':'4', 'class':'blue', 'action':function() { calculator.numberPressed('4'); } },
@@ -71,7 +71,6 @@ boidem.adlessCalc = (function() {
 		var phi = (1.0 + Math.sqrt(5)) / 2.0;
 
 		var cellHeight = Math.floor(screenHeight / (numRows + displayRows)) - 1; // one px less to ensure sufficient space
-		console.log("-> " + screenHeight + " " + numRows + " " + displayRows + " " + cellHeight); //TODO rm 
 		var cellWidth = Math.floor(Math.min(phi * cellHeight, screenWidth / minCols)) - 1;
 		var buttonHeight = (1.0 - buttonMarginRatio) * cellHeight;
 		var buttonWidth = (1.0 - buttonMarginRatio) * cellWidth;
@@ -90,12 +89,17 @@ boidem.adlessCalc = (function() {
 			$('#button' + index).hide();
 
 		// Position display
-		var displayHeight = (phi * cellHeight) + 'px';
-		$('#displayContainer').css({'height': displayHeight});
+		var displayHeight = phi * cellHeight;
+		var fontSize = Math.round(0.75 * displayHeight) + 'px'
+		$('#displayContainer').css({'height': displayHeight + 'px'});
 		$('#displayContainer').css({'width': (numCols * cellWidth - buttonMargin) + 'px'});
 		$('#displayContainer').css({'top': (cellHeight * (2.0 - phi) / 2.0) + 'px'});
 		$('#displayContainer').css({'right': buttonsRight + 'px'});
-		$('#display').css({'line-height': displayHeight});
+
+		$('#display').css({'line-height': displayHeight + 'px'});
+		$('#display').css({'font-size': fontSize});
+		NODEBUG || console.log("displayHeight=" + displayHeight + ' fontSize=' + fontSize);
+
 		$('#displayContainer').show();
 
 		// TODO: display font size -- rough heuristic depending on dimensions?
@@ -114,6 +118,7 @@ boidem.adlessCalc = (function() {
 				$('#button' + buttonsIndex).css({'right': dx + 'px'});
 				$('#button' + buttonsIndex).css({'top'  : dy + 'px'});
 				$('#button' + buttonsIndex + ' > .vcenter').css({'line-height':height + 'px'});
+				$('#button' + buttonsIndex + ' > .vcenter').css({'font-size':Math.round(0.75 * height) + 'px'});
 				$('#button' + buttonsIndex).show();
 
 				buttonsIndex += 1;
