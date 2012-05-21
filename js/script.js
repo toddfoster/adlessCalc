@@ -11,7 +11,6 @@ boidem.adlessCalc = (function() {
 	var minCols = 4;
 	var buttonMarginRatio = 0.15;
 
-	var buttons = [];
 	var buttonDefinitions = [
 		{ 'symbol':'=', 'class':'grey', 'action':function() { calculator.equals(); } },
 		{ 'symbol':'X', 'class':'orange', 'action':function() { calculator.operatorPressed(function(a, b) { return a * b; }) } },
@@ -56,15 +55,12 @@ boidem.adlessCalc = (function() {
 		var i;
 		for (i=0; i<buttonDefinitions.length; i+=1) {
 			var definition = buttonDefinitions[i];
-			if (definition.stretch === 'skip') {
-				buttons[i] = null;
+			if (definition.stretch === 'skip')
 				continue;
-			}
 			NODEBUG || console.log("make button " + i + " for symbol " + definition.symbol);
             $('body').append('<a id="button' + i + '" class="button ' + definition.class + '">' + definition.symbol + '</div>');
             var button = $('#button' + i);
 			button.click(definition.action);
-			buttons[i] = button;
 		}
 	});
 
@@ -90,8 +86,8 @@ boidem.adlessCalc = (function() {
 		// Hide everything
 		$('#display').hide();
 		var index;
-		for (index=0; index<buttons.length; index++)
-			buttons[index] && buttons[index].hide();
+		for (index=0; index<buttonDefinitions.length; index++)
+			$('#button' + index).hide();
 
 		// Position display
 		$('#display').css({'height': (phi * cellHeight) + 'px'});
@@ -109,21 +105,18 @@ boidem.adlessCalc = (function() {
 		var buttonsIndex = 0;
 		for (dx=buttonsRight; dx + cellWidth < screenWidth; dx += cellWidth) {
 			for (dy=buttonsTop; dy + cellHeight < screenHeight; dy += cellHeight) {
-				var button = buttons[buttonsIndex];
-				if (button !== null) {
-					var width  = cellWidth  * (buttonDefinitions[buttonsIndex].stretch === 'horizontal' ? 2.0 : 1.0);
-					var height = cellHeight * (buttonDefinitions[buttonsIndex].stretch === 'vertical'   ? 2.0 : 1.0);
-					width  -= buttonMargin;
-					height -= buttonMargin;
-					button.css({'width' : width  + 'px'});
-					button.css({'height': height + 'px'});
-					button.css({'right': dx + 'px'});
-					button.css({'top'  : dy + 'px'});
-					button.show();
-				}
+				var width  = cellWidth  * (buttonDefinitions[buttonsIndex].stretch === 'horizontal' ? 2.0 : 1.0);
+				var height = cellHeight * (buttonDefinitions[buttonsIndex].stretch === 'vertical'   ? 2.0 : 1.0);
+				width  -= buttonMargin;
+				height -= buttonMargin;
+				$('#button' + buttonsIndex).css({'width' : width  + 'px'});
+				$('#button' + buttonsIndex).css({'height': height + 'px'});
+				$('#button' + buttonsIndex).css({'right': dx + 'px'});
+				$('#button' + buttonsIndex).css({'top'  : dy + 'px'});
+				$('#button' + buttonsIndex).show();
 
 				buttonsIndex += 1;
-				if (buttonsIndex === buttons.length)
+				if (buttonsIndex === buttonDefinitions.length)
 					return;
 			}
 		}

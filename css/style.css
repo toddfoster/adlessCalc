@@ -104,9 +104,6 @@ body { background:black; }
 
 	display:inline-block;
 	cursor:pointer;
-	/*
-	padding:10px 20px;
-*/
 	text-align:center;
 
 	/* Applying a default border raidus of 8px */
@@ -120,10 +117,6 @@ body { background:black; }
 	-moz-box-shadow:0 0 1px #fff inset;
 	-webkit-box-shadow:0 0 1px #fff inset;
 	box-shadow:0 0 1px #fff inset;
-}
-
-.button:hover{
-
 }
 
 .button:active{
