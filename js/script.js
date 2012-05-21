@@ -102,8 +102,10 @@ boidem.adlessCalc = (function() {
 		// Position buttons
 		var dx, dy;
 		var buttonsIndex = 0;
-		for (dx=buttonsRight; dx + cellWidth <= screenWidth; dx += cellWidth) {
-			for (dy=buttonsTop; dy + cellHeight <= screenHeight; dy += cellHeight) {
+		alert('screenwidth=' + screenWidth + ' cellWidth=' + cellWidth + 'buttonsRight=' + buttonsRight); //TODO rm
+		for (dx=buttonsRight; dx + cellWidth < screenWidth; dx += cellWidth) {
+			alert('dx=' + dx); //TODO rm 
+			for (dy=buttonsTop; dy + cellHeight < screenHeight; dy += cellHeight) {
 				var width  = cellWidth  * (buttonDefinitions[buttonsIndex].stretch === 'horizontal' ? 2.0 : 1.0);
 				var height = cellHeight * (buttonDefinitions[buttonsIndex].stretch === 'vertical'   ? 2.0 : 1.0);
 				width  -= buttonMargin;
