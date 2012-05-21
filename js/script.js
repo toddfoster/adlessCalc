@@ -90,25 +90,21 @@ boidem.adlessCalc = (function() {
 
 		// Position display
 		var displayHeight = phi * cellHeight;
-		var fontSize = Math.round(0.75 * displayHeight) + 'px'
 		$('#displayContainer').css({'height': displayHeight + 'px'});
 		$('#displayContainer').css({'width': (numCols * cellWidth - buttonMargin) + 'px'});
 		$('#displayContainer').css({'top': (cellHeight * (2.0 - phi) / 2.0) + 'px'});
 		$('#displayContainer').css({'right': buttonsRight + 'px'});
-
 		$('#display').css({'line-height': displayHeight + 'px'});
-		$('#display').css({'font-size': fontSize});
+		$('#display').css({'font-size': Math.round(0.75 * displayHeight) + 'px'});
 		NODEBUG || console.log("displayHeight=" + displayHeight + ' fontSize=' + fontSize);
 
 		$('#displayContainer').show();
 
-		// TODO: display font size -- rough heuristic depending on dimensions?
-
 		// Position buttons
 		var dx, dy;
 		var buttonsIndex = 0;
-		for (dx=buttonsRight; dx + cellWidth < screenWidth; dx += cellWidth) {
-			for (dy=buttonsTop; dy + cellHeight < screenHeight; dy += cellHeight) {
+		for (dx=buttonsRight; dx + cellWidth <= screenWidth; dx += cellWidth) {
+			for (dy=buttonsTop; dy + cellHeight <= screenHeight; dy += cellHeight) {
 				var width  = cellWidth  * (buttonDefinitions[buttonsIndex].stretch === 'horizontal' ? 2.0 : 1.0);
 				var height = cellHeight * (buttonDefinitions[buttonsIndex].stretch === 'vertical'   ? 2.0 : 1.0);
 				width  -= buttonMargin;

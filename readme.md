@@ -15,15 +15,16 @@ Begun 19 May 2012
 * Switch from jquery to [zepto](http://zeptojs.com/)
 * memory indicator
 * display/clear error conditions
-* animate button press (shadow/colors?)
 * perf: must be snappy!
 * icon
 * unicode multiply,divide symbols
 * Alert user of process to save webapp on home screen if not window.navigator.standalone
 * keyboard input (use form text field for display instead of simple div? catch operation keys?)
 * test, deal with floating point precision problems (return 1 instead of 0.9999...)
+* limit number digits to width of screen / precision
 
 ## MAYBE
+* Prettier button animation
 * Animate resize positioning
 
 ## DONE
@@ -36,6 +37,7 @@ Begun 19 May 2012
 * memory buttons
 * center-up keypad
 * key appearance
+* animate button press (shadow/colors?)
 * push css into external css file
 * Clean up resize (hide elements during move?)
 * font size for display
