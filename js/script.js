@@ -78,7 +78,8 @@ boidem.adlessCalc = (function() {
 		var numCols = Math.min(Math.floor(screenWidth / cellWidth), Math.ceil(buttonDefinitions.length / numRows));
 		NODEBUG || console.log("Screen=" + screenWidth + "x" + screenHeight + "  cell=" + cellWidth + "x" + cellHeight + "  buttons=" + buttonWidth + "x" + buttonHeight + "  numCols=" + numCols);
 
-		var buttonsRight = 0.5 * (buttonMargin + (screenWidth - (cellWidth * numCols)));
+		//var buttonsRight = 0.5 * (buttonMargin + (screenWidth - (cellWidth * numCols)));
+		var buttonsRight = 0.0; //TODO rm
 		var buttonsTop = 2.0 * cellHeight;
 		NODEBUG || console.log("    buttons right/top=" + buttonsRight + "," + buttonsTop);
 
@@ -102,9 +103,8 @@ boidem.adlessCalc = (function() {
 		// Position buttons
 		var dx, dy;
 		var buttonsIndex = 0;
-		alert('screenwidth=' + screenWidth + ' cellWidth=' + cellWidth + 'buttonsRight=' + buttonsRight); //TODO rm
 		for (dx=buttonsRight; dx + cellWidth < screenWidth; dx += cellWidth) {
-			alert('dx=' + dx); //TODO rm 
+			NODEBUG || console.log("    dx=" + dx);
 			for (dy=buttonsTop; dy + cellHeight < screenHeight; dy += cellHeight) {
 				var width  = cellWidth  * (buttonDefinitions[buttonsIndex].stretch === 'horizontal' ? 2.0 : 1.0);
 				var height = cellHeight * (buttonDefinitions[buttonsIndex].stretch === 'vertical'   ? 2.0 : 1.0);

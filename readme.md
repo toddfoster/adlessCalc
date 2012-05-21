@@ -9,15 +9,15 @@ A beautiful solution: web-app's on the home screen! An educational experiment as
 Begun 19 May 2012
 
 ## TODO
+* unicode multiply,divide symbols
+* perf: must be snappy!
 * manifest, headers to support offline mode
 * shiny keys
 * Add buttons in landscape mode
 * Switch from jquery to [zepto](http://zeptojs.com/)
 * memory indicator
 * display/clear error conditions
-* perf: must be snappy!
 * icon
-* unicode multiply,divide symbols
 * Alert user of process to save webapp on home screen if not window.navigator.standalone
 * keyboard input (use form text field for display instead of simple div? catch operation keys?)
 * test, deal with floating point precision problems (return 1 instead of 0.9999...)
