@@ -10,7 +10,6 @@ Begun 19 May 2012
 
 ## TODO
 * manifest, headers to support offline mode
-* font size for display
 * shiny keys
 * Add buttons in landscape mode
 * Switch from jquery to [zepto](http://zeptojs.com/)
@@ -20,6 +19,7 @@ Begun 19 May 2012
 * perf: must be snappy!
 * icon
 * unicode multiply,divide symbols
+* Alert user of process to save webapp on home screen if not window.navigator.standalone
 * keyboard input (use form text field for display instead of simple div? catch operation keys?)
 * test, deal with floating point precision problems (return 1 instead of 0.9999...)
 
@@ -38,6 +38,7 @@ Begun 19 May 2012
 * key appearance
 * push css into external css file
 * Clean up resize (hide elements during move?)
+* font size for display
 
 ## Credits
 * [HTML5 boilerplate]:(http://html5boilerplate.com/)
