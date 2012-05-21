@@ -96,7 +96,6 @@ boidem.adlessCalc = (function() {
 		$('#displayContainer').css({'right': buttonsRight + 'px'});
 		$('#display').css({'line-height': displayHeight + 'px'});
 		$('#display').css({'font-size': Math.round(0.75 * displayHeight) + 'px'});
-		NODEBUG || console.log("displayHeight=" + displayHeight + ' fontSize=' + fontSize);
 
 		$('#displayContainer').show();
 
