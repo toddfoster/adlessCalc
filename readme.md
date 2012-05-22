@@ -9,13 +9,11 @@ A beautiful solution: web-app's on the home screen! An educational experiment as
 Begun 19 May 2012
 
 ## TODO
-* manifest, headers to support offline mode -- fix home page not refreshing?
 * monospace font in display
 * perf: must be snappy!
 * replicate ability of calculator to repeat computation by pressing =
 * shiny keys
 * Add buttons in landscape mode
-* Switch from jquery to [zepto](http://zeptojs.com/)
 * memory indicator
 * display/clear error conditions
 * icon
@@ -44,8 +42,10 @@ Begun 19 May 2012
 * font size for display
 * disable reposition app by dragging
 * unicode multiply,divide symbols
+* manifest, headers to support offline mode -- fix home page not refreshing?
+* Switch from jquery to [zepto](http://zeptojs.com/)
 
 ## Credits
-* [HTML5 boilerplate]:(http://html5boilerplate.com/)
-* Help with [buttons]:(http://tutorialzine.com/2010/10/css3-animated-bubble-buttons/)
-* [WebApp adaptation]:(http://matt.might.net/articles/how-to-native-iphone-ipad-apps-in-javascript/)
+* [HTML5 boilerplate](http://html5boilerplate.com/)
+* Help with [buttons](http://tutorialzine.com/2010/10/css3-animated-bubble-buttons/)
+* [WebApp adaptation](http://matt.might.net/articles/how-to-native-iphone-ipad-apps-in-javascript/)
