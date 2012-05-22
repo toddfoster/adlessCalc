@@ -7,7 +7,6 @@ boidem = {};
 boidem.adlessCalc = (function() {
 	var DEBUG = 0;
 	var displayRows = 2;
-	var numRows = 6;
 	var minCols = 4;
 	var buttonMarginRatio = 0.15;
 
@@ -65,6 +64,8 @@ boidem.adlessCalc = (function() {
 	});
 
 	var onResize = (function() {
+		var numRows = 6;
+
 		var screenWidth = $(window).width();
 		var screenHeight = $(window).height();
 
@@ -100,11 +101,14 @@ boidem.adlessCalc = (function() {
 		$('#displayContainer').show();
 
 		// Position buttons
-		var dx, dy;
+		var loopX, loopY;
 		var buttonsIndex = 0;
-		for (dx=buttonsRight; dx + cellWidth < screenWidth; dx += cellWidth) {
-			DEBUG && console.log("    dx=" + dx);
-			for (dy=buttonsTop; dy + cellHeight < screenHeight; dy += cellHeight) {
+		for (loopX=0; loopX < numCols; loopX+=1) {
+			var dx = buttonsRight + loopX * cellWidth;
+			DEBUG && console.log('    Column ' + loopX + ': dx=' + dx);
+			for (loopY=0; loopY < numRows; loopY+=1) {
+				var dy = buttonsTop + loopY * cellHeight;
+				DEBUG && console.log('      Row' + loopY + ': dy=' + dy);
 				var width  = cellWidth  * (buttonDefinitions[buttonsIndex].stretch === 'horizontal' ? 2.0 : 1.0);
 				var height = cellHeight * (buttonDefinitions[buttonsIndex].stretch === 'vertical'   ? 2.0 : 1.0);
 				width  -= buttonMargin;
