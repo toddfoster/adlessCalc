@@ -9,6 +9,7 @@ A beautiful solution: web-app's on the home screen! An educational experiment as
 Begun 19 May 2012
 
 ## TODO
+* Provide visible version indicator
 * monospace font in display
 * perf: must be snappy!
 * replicate ability of calculator to repeat computation by pressing =

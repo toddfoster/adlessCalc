@@ -34,7 +34,8 @@ boidem.adlessCalc = (function() {
 		{ 'symbol':'7', 'class':'blue', 'action':function() { calculator.numberPressed('7'); } },
 		{ 'symbol':'4', 'class':'blue', 'action':function() { calculator.numberPressed('4'); } },
 		{ 'symbol':'1', 'class':'blue', 'action':function() { calculator.numberPressed('1'); } },
-		{ 'stretch':'skip' }
+		{ 'stretch':'skip' },
+		{ 'symbol':'v2', 'class':'grey', 'action':function() { console.log("Version button"); } },
 	];
 
 	var onDocumentReady = (function() {
@@ -57,9 +58,8 @@ boidem.adlessCalc = (function() {
 			if (definition.stretch === 'skip')
 				continue;
 			DEBUG && console.log("make button " + i + " for symbol " + definition.symbol);
-            $('body').append('<a id="button' + i + '" class="button ' + definition.class + '"><div class="vcenter">' + definition.symbol + '</div></a>');
-            var button = $('#button' + i);
-			button.click(definition.action);
+			$('body').append('<span id="button' + i + '" class="button ' + definition.class + '"><div class="vcenter">' + definition.symbol + '</div></span>');
+            		$('#button' + i).click(definition.action);
 		}
 	});
 
