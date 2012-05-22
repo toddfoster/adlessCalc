@@ -1,0 +1,18 @@
+CACHE MANIFEST
+
+# Bump this with each release:
+# Serial number 0
+
+css/style.css
+js/script.js
+js/plugins.js
+js/libs/jquery-1.7.2.min.js
+js/libs/modernizr-2.5.3.min.js
+
+apple-touch-icon.png
+jquery.js
+
+index.html
+
+NETWORK:
+
