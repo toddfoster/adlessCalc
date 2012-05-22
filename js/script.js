@@ -59,7 +59,7 @@ boidem.adlessCalc = (function() {
 				continue;
 			DEBUG && console.log("make button " + i + " for symbol " + definition.symbol);
 			$('body').append('<span id="button' + i + '" class="button ' + definition.class + '"><div class="vcenter">' + definition.symbol + '</div></span>');
-            		$('#button' + i).click(definition.action);
+            		$('#button' + i).tap(definition.action);
 		}
 	});
 
