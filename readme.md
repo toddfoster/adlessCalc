@@ -9,15 +9,18 @@ A beautiful solution: web-app's on the home screen! An educational experiment as
 Begun 19 May 2012
 
 ## TODO
-* Provide visible version indicator
+* Use click for desktop
+* Sync version in app/manifest? (read/parse manifest via js)
+* Better version indication (dedicated button? info panel?)
 * monospace font in display
-* perf: must be snappy!
 * replicate ability of calculator to repeat computation by pressing =
 * shiny keys
 * Add buttons in landscape mode
 * memory indicator
 * display/clear error conditions
 * icon
+* better perf: hit keys rapidly
+* don't zoom on long/double touch
 * Alert user of process to save webapp on home screen if not window.navigator.standalone: http://cubiq.org/add-to-home-screen
 * keyboard input (use form text field for display instead of simple div? catch operation keys?)
 * test, deal with floating point precision problems (return 1 instead of 0.9999...)
@@ -45,6 +48,8 @@ Begun 19 May 2012
 * unicode multiply,divide symbols
 * manifest, headers to support offline mode -- fix home page not refreshing?
 * Switch from jquery to [zepto](http://zeptojs.com/)
+* perf: must be snappy!
+* Provide visible version indicator
 
 ## Credits
 * [HTML5 boilerplate](http://html5boilerplate.com/)

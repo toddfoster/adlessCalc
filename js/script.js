@@ -5,6 +5,7 @@
 boidem = {};
 
 boidem.adlessCalc = (function() {
+	var version = 0.3;
 	var DEBUG = 0;
 	var displayRows = 2;
 	var minCols = 4;
@@ -35,7 +36,7 @@ boidem.adlessCalc = (function() {
 		{ 'symbol':'4', 'class':'blue', 'action':function() { calculator.numberPressed('4'); } },
 		{ 'symbol':'1', 'class':'blue', 'action':function() { calculator.numberPressed('1'); } },
 		{ 'stretch':'skip' },
-		{ 'symbol':'v2', 'class':'grey', 'action':function() { console.log("Version button"); } },
+		{ 'symbol':version, 'class':'grey', 'action':function() { console.log("Version button"); } },
 	];
 
 	var onDocumentReady = (function() {
