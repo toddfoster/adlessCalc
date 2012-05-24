@@ -9,7 +9,7 @@ A beautiful solution: web-app's on the home screen! An educational experiment as
 Begun 19 May 2012
 
 ## TODO
-* monospace font in display
+* limit number digits to width of screen / precision
 * replicate ability of calculator to repeat computation by pressing =
 * shiny keys
 * Add buttons in landscape mode
@@ -22,7 +22,6 @@ Begun 19 May 2012
 * Alert user of process to save webapp on home screen if not window.navigator.standalone: http://cubiq.org/add-to-home-screen
 * keyboard input (use form text field for display instead of simple div? catch operation keys?)
 * test, deal with floating point precision problems (return 1 instead of 0.9999...)
-* limit number digits to width of screen / precision
 
 ## MAYBE
 * Prettier button animation
@@ -50,6 +49,7 @@ Begun 19 May 2012
 * Provide visible version indicator
 * Use click for desktop
 * don't zoom on long/double touch
+* monospace font in display
 
 ## Credits
 * [HTML5 boilerplate](http://html5boilerplate.com/)

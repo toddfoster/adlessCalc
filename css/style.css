@@ -88,6 +88,8 @@ body { background:black; }
 	border-width:2px;
 
 	text-align:right;
+
+	font-family:monospace;
 }
 
 .display{
