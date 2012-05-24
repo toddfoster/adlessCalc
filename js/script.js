@@ -5,7 +5,7 @@
 boidem = {};
 
 boidem.adlessCalc = (function() {
-	var version = 0.34;
+	var version = 0.35;
 	var DEBUG = 0;
 	var displayRows = 2;
 	var minCols = 4;
@@ -40,7 +40,13 @@ boidem.adlessCalc = (function() {
 		{ 'symbol':version, 'class':'grey', 'action':function() { console.log("Version button"); } },
 	];
 
+	var onUpdateReady = (function() { window.location.reload(true); });
+
 	var onDocumentReady = (function() {
+			window.applicationCache.addEventListener('updateready', onUpdateReady);
+			if(window.applicationCache.status === window.applicationCache.UPDATEREADY)
+				onUpdateReady();
+
 			$('body').prepend('<div id="displayContainer" class="displayContainer"><div id="display" class="display"></div></div>');
 			$(window).resize(onResize);
 

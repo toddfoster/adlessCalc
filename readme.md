@@ -9,13 +9,13 @@ A beautiful solution: web-app's on the home screen! An educational experiment as
 Begun 19 May 2012
 
 ## TODO
-* Better version indication (dedicated button? info panel?)
 * monospace font in display
 * replicate ability of calculator to repeat computation by pressing =
 * shiny keys
 * Add buttons in landscape mode
 * memory indicator
 * display/clear error conditions
+* Better version indication (dedicated button? info panel?)
 * Sync version in app/manifest? (read/parse manifest via js)
 * icon
 * better perf: hit keys rapidly
