@@ -90,6 +90,7 @@ body { background:black; }
 	text-align:right;
 
 	font-family:monospace;
+	font-weight:bold;
 }
 
 .display{

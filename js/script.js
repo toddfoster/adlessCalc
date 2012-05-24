@@ -5,7 +5,7 @@
 boidem = {};
 
 boidem.adlessCalc = (function() {
-	var version = 0.36;
+	var version = 0.37;
 	var DEBUG = 0;
 	var displayRows = 2;
 	var minCols = 4;
