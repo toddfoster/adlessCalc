@@ -11,14 +11,12 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<script> document.addEventListener('touchmove',function(e) { e.preventDefault() },false); </script>
 
 	<link rel="stylesheet" href="css/style.css">
 
-    <script> function BlockMove(event) { event.preventDefault(); } </script>
-
-
 </head>
-<body ontouchmove="BlockMove(event);" >
+<body>
 <header>
 
 </header>
@@ -31,5 +29,6 @@
 
 <script src="js/libs/zepto.min.js"></script>
 <script src="js/script.js"></script>
+
 </body>
 </html>

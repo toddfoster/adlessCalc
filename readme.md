@@ -19,7 +19,6 @@ Begun 19 May 2012
 * Sync version in app/manifest? (read/parse manifest via js)
 * icon
 * better perf: hit keys rapidly
-* don't zoom on long/double touch
 * Alert user of process to save webapp on home screen if not window.navigator.standalone: http://cubiq.org/add-to-home-screen
 * keyboard input (use form text field for display instead of simple div? catch operation keys?)
 * test, deal with floating point precision problems (return 1 instead of 0.9999...)
@@ -50,6 +49,7 @@ Begun 19 May 2012
 * perf: must be snappy!
 * Provide visible version indicator
 * Use click for desktop
+* don't zoom on long/double touch
 
 ## Credits
 * [HTML5 boilerplate](http://html5boilerplate.com/)
