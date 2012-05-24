@@ -5,11 +5,12 @@
 boidem = {};
 
 boidem.adlessCalc = (function() {
-	var version = 0.31;
+	var version = 0.32;
 	var DEBUG = 0;
 	var displayRows = 2;
 	var minCols = 4;
 	var buttonMarginRatio = 0.15;
+	var supportsTouch = (typeof Touch == "object");
 
 	var buttonDefinitions = [
 		{ 'symbol':'=', 'class':'grey', 'action':function() { calculator.equals(); } },
@@ -60,8 +61,10 @@ boidem.adlessCalc = (function() {
 				continue;
 			DEBUG && console.log("make button " + i + " for symbol " + definition.symbol);
 			$('body').append('<span id="button' + i + '" class="button ' + definition.class + '"><div class="vcenter">' + definition.symbol + '</div></span>');
-            		$('#button' + i).tap(definition.action);
-            		$('#button' + i).click(definition.action);
+            		if (supportsTouch)
+						$('#button' + i).tap(definition.action);
+					else
+ 		           		$('#button' + i).click(definition.action);
 		}
 	});
 
