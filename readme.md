@@ -9,8 +9,6 @@ A beautiful solution: web-app's on the home screen! An educational experiment as
 Begun 19 May 2012
 
 ## TODO
-* Use click for desktop
-* Sync version in app/manifest? (read/parse manifest via js)
 * Better version indication (dedicated button? info panel?)
 * monospace font in display
 * replicate ability of calculator to repeat computation by pressing =
@@ -18,6 +16,7 @@ Begun 19 May 2012
 * Add buttons in landscape mode
 * memory indicator
 * display/clear error conditions
+* Sync version in app/manifest? (read/parse manifest via js)
 * icon
 * better perf: hit keys rapidly
 * don't zoom on long/double touch
@@ -50,6 +49,7 @@ Begun 19 May 2012
 * Switch from jquery to [zepto](http://zeptojs.com/)
 * perf: must be snappy!
 * Provide visible version indicator
+* Use click for desktop
 
 ## Credits
 * [HTML5 boilerplate](http://html5boilerplate.com/)
