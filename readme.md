@@ -9,7 +9,7 @@ A beautiful solution: web-app's on the home screen! An educational experiment as
 Begun 19 May 2012
 
 ## TODO
-* limit number digits to width of screen / precision
+* v.38 limit number digits to width of screen / precision
 * replicate ability of calculator to repeat computation by pressing =
 * shiny keys
 * Add buttons in landscape mode

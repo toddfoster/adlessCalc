@@ -5,10 +5,11 @@
 boidem = {};
 
 boidem.adlessCalc = (function() {
-	var version = 0.37;
-	var DEBUG = 0;
+	var version = 0.38;
+	var DEBUG = false;
 	var displayRows = 2;
 	var minCols = 4;
+	var numberOfCharactersInDisplay = 8;
 	var buttonMarginRatio = 0.15;
 	var supportsTouch = (typeof Touch == "object");
 
@@ -43,6 +44,7 @@ boidem.adlessCalc = (function() {
 	var onUpdateReady = (function() { window.location.reload(true); });
 
 	var onDocumentReady = (function() {
+			DEBUG && console.log("onDocumentReady");
 			window.applicationCache.addEventListener('updateready', onUpdateReady);
 			if(window.applicationCache.status === window.applicationCache.UPDATEREADY)
 				onUpdateReady();
@@ -102,12 +104,20 @@ boidem.adlessCalc = (function() {
 
 		// Position display
 		var displayHeight = phi * cellHeight;
+		var displayWidth = numCols * cellWidth - buttonMargin;
 		$('#displayContainer').css({'height': displayHeight + 'px'});
-		$('#displayContainer').css({'width': (numCols * cellWidth - buttonMargin) + 'px'});
+		$('#displayContainer').css({'width': displayWidth + 'px'});
 		$('#displayContainer').css({'top': (cellHeight * (2.0 - phi) / 2.0) + 'px'});
 		$('#displayContainer').css({'right': buttonsRight + 'px'});
 		$('#display').css({'line-height': displayHeight + 'px'});
 		$('#display').css({'font-size': Math.round(0.75 * displayHeight) + 'px'});
+
+		numberOfCharactersInDisplay = numCols * 2;
+		if (displayWidth < 80)
+			numberOfCharactersInDisplay -= 2;
+		else if (displayWidth < 180)
+			numberOfCharactersInDisplay -= 1;
+		DEBUG && console.log("displayHeight=" + displayHeight + " displayWidth=" + numCols + "*" + cellWidth + "-" + buttonMargin + "=" + (numCols * cellWidth - buttonMargin) + " with font-size=" + Math.round(0.75 * displayHeight) + " for " + numberOfCharactersInDisplay + " characters");
 
 		$('#displayContainer').show();
 
@@ -242,7 +252,17 @@ boidem.adlessCalc = (function() {
 		});
 
 		var showInput = (function() {
-			$('#display').text(input);
+			var result = input.toString();
+			var precision = numberOfCharactersInDisplay;
+			while (result.length > numberOfCharactersInDisplay)
+				{
+					precision -= 1;
+					result = parseFloat(input).toPrecision(precision);
+				}
+
+			DEBUG && console.log("showInput " + input + " has " + input.toString().length + " characters out of " + numberOfCharactersInDisplay + " with a result of " + result.length + " " + result);
+			input = result;
+			$('#display').text(result);
 		});
 
 		return {
