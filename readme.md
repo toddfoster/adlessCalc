@@ -9,7 +9,6 @@ A beautiful solution: web-app's on the home screen! An educational experiment as
 Begun 19 May 2012
 
 ## TODO
-* v.38 limit number digits to width of screen / precision
 * replicate ability of calculator to repeat computation by pressing =
 * shiny keys
 * Add buttons in landscape mode
@@ -50,6 +49,7 @@ Begun 19 May 2012
 * Use click for desktop
 * don't zoom on long/double touch
 * monospace font in display
+* v.38 limit number digits to width of screen / precision
 
 ## Credits
 * [HTML5 boilerplate](http://html5boilerplate.com/)

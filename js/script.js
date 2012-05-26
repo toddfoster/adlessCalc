@@ -5,8 +5,9 @@
 boidem = {};
 
 boidem.adlessCalc = (function() {
-	var version = 0.38;
+	var version = "0.38'";
 	var DEBUG = false;
+	var LAYOUT_DEBUG = false;
 	var displayRows = 2;
 	var minCols = 4;
 	var numberOfCharactersInDisplay = 8;
@@ -119,6 +120,7 @@ boidem.adlessCalc = (function() {
 			numberOfCharactersInDisplay -= 1;
 		DEBUG && console.log("displayHeight=" + displayHeight + " displayWidth=" + numCols + "*" + cellWidth + "-" + buttonMargin + "=" + (numCols * cellWidth - buttonMargin) + " with font-size=" + Math.round(0.75 * displayHeight) + " for " + numberOfCharactersInDisplay + " characters");
 
+		calculator.refresh();
 		$('#displayContainer').show();
 
 		// Position buttons
@@ -126,10 +128,10 @@ boidem.adlessCalc = (function() {
 		var buttonsIndex = 0;
 		for (loopX=0; loopX < numCols; loopX+=1) {
 			var dx = buttonsRight + loopX * cellWidth;
-			DEBUG && console.log('    Column ' + loopX + ': dx=' + dx);
+			LAYOUT_DEBUG && console.log('    Column ' + loopX + ': dx=' + dx);
 			for (loopY=0; loopY < numRows; loopY+=1) {
 				var dy = buttonsTop + loopY * cellHeight;
-				DEBUG && console.log('      Row' + loopY + ': dy=' + dy);
+				LAYOUT_DEBUG && console.log('      Row' + loopY + ': dy=' + dy);
 				var width  = cellWidth  * (buttonDefinitions[buttonsIndex].stretch === 'horizontal' ? 2.0 : 1.0);
 				var height = cellHeight * (buttonDefinitions[buttonsIndex].stretch === 'vertical'   ? 2.0 : 1.0);
 				width  -= buttonMargin;
@@ -139,7 +141,7 @@ boidem.adlessCalc = (function() {
 				$('#button' + buttonsIndex).css({'right': dx + 'px'});
 				$('#button' + buttonsIndex).css({'top'  : dy + 'px'});
 				$('#button' + buttonsIndex + ' > .vcenter').css({'line-height':height + 'px'});
-				$('#button' + buttonsIndex + ' > .vcenter').css({'font-size':Math.round(0.75 * height) + 'px'});
+				$('#button' + buttonsIndex + ' > .vcenter').css({'font-size':Math.round(0.70 * height) + 'px'});
 				$('#button' + buttonsIndex).show();
 
 				buttonsIndex += 1;
@@ -274,6 +276,7 @@ boidem.adlessCalc = (function() {
 			sqrt:function() { sqrt(); },
 			reset:function() { init(); },
 			memory:function(value) { memory(value); },
+			refresh:function() { showInput(); },
 		};
 }());
 
